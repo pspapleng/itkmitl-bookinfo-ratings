@@ -24,6 +24,11 @@ docker build -t ratings .
 # Run MongoDB with initial data in database
 docker run -d --name mongodb -p 27017:27017 \
   -v $(pwd)/databases:/docker-entrypoint-initdb.d bitnami/mongodb:5.0.2-debian-10-r2
+  
+# Run MongoDB with initial data in database with secure
+docker run -d --name mongodb -p 27017:27017 -e MONGODB_USERNAME=ratings -e MONGODB_PASSWORD=CHANGEME -e MONGODB_DATABASE=ratings \
+  -v $(pwd)/databases:/docker-entrypoint-initdb.d bitnami/mongodb:5.0.2-debian-10-r2
+
 
 # Run MongoDB with initial data in database with secure
 docker run -d --name mongodb -p 27017:27017 -e 'MONGODB_USERNAME=ratings' -e 'MONGODB_PASSWORD=CHANGEME' -e 'MONGODB_DATABASE=ratings' \
